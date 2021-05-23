@@ -2,7 +2,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![Cloud Security](https://drive.google.com/file/d/18mNzVWMrXWTnE1uFTFeFKwgiAG2Kzhrg/view?usp=sharing)
+![Cloud Security](https://github.com/JMor4n/scripts/blob/main/diagrams/Cloud%20Security.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
