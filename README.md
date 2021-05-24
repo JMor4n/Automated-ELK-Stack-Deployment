@@ -10,15 +10,24 @@ These files have been tested and used to generate a live ELK deployment on Azure
 
 ### Playbook File
 ---
-- [Find Playbook in this link](../main/ansible)
 
-This document contains the following details:
-- Description of the Topology
+[This document contains the following details:](../main/ansible)
+
+- Description of the Topology --> Cloud Secuity map
 - Access Policies
-- ELK Configuration
+- ELK Configuration - elk.yml
   - Beats in Use
   - Machines Being Monitored
 - How to Use the Ansible Build
+
+
+- hosts --> This is the ansible hosts cofiguration file
+- pentest --> This yaml file install Docker, Python3, Damn Vulnerable Web Application (DVWA) in the VM Web1 and VM Web2 
+- elk.yml --> This is the Ansible playbook file that install Elastic Logstash Kibana on the ELK VM to monitor Web1 and Web2
+- filebeat-config -->
+- filebeat-playbook -->
+- metricbeat-config -->
+- metricbeat-playbook.yml
 
 ---
 
@@ -26,7 +35,14 @@ This document contains the following details:
 ---
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
+Load balancing ensures that the application will be highly availble, in addition to restricting unauthorized access to the network.
+
+
+
+
+
+
+
 - _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
@@ -42,9 +58,13 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 
 | Name     | Function        | IP Address | Operating System |
 |----------|-----------------|------------|------------------|
-| Jump Box | Gateway         | 10.0.0.1   | Ubuntu Linux     |
+| Jump Box | Gateway         | 10.0.0.4   | Ubuntu Linux     |
 | Web1     | Reduncy         |            | Ubuntu Linux     |
 | Web2     | Reduncy         |            | Ubuntu Linux     |
+| ELK      | Log Monitoring  |            | Ubuntu Linux     |
+| DVWA-VM      | Log Monitoring  |            | Ubuntu Linux     |
+| ELK      | Log Monitoring  |            | Ubuntu Linux     |
+| ELK      | Log Monitoring  |            | Ubuntu Linux     |
 | ELK      | Log Monitoring  |            | Ubuntu Linux     |
 
 ### Access Policies
@@ -59,11 +79,14 @@ Machines within the network can only be accessed by the Jump Box and the Jump Bo
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name          | Publickly Accessible | Allowed IP Addresses         | Access Method   |
+|---------------|----------------------|------------------------------|-----------------|
+| Jump Box      | NO                   | My Home Public IP Adreess    | SSH Publick Key |
+| Load Balancer | NO                   |                              |                 |
+| ELK           | NO                   |                              |                 |
+| Web1          | YES                  | Public Web                   |                 |
+| Web2          | YES                  | Public Web                   |                 |
+
 
 ### Elk Configuration
 
