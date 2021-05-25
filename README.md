@@ -11,8 +11,6 @@ These files have been tested and used to generate a live ELK deployment on Azure
 ### Playbook File
 ---
 
-[This document contains the following details:](../main/ansible)
-
 - Description of the Topology --> Cloud Secuity map
 - Access Policies
 - ELK Configuration - elk.yml
@@ -20,14 +18,17 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - Machines Being Monitored
 - How to Use the Ansible Build
 
+[This document contains the following details:](../main/ansible)
 
-- hosts --> This is the ansible hosts cofiguration file
-- pentest --> This yaml file install Docker, Python3, Damn Vulnerable Web Application (DVWA) in the VM Web1 and VM Web2 
-- elk.yml --> This is the Ansible playbook file that install Elastic Logstash Kibana on the ELK VM to monitor Web1 and Web2
-- filebeat-config -->
-- filebeat-playbook -->
-- metricbeat-config -->
-- metricbeat-playbook.yml
+| Name                | Description                                                                                                   |  
+|---------------------|---------------------------------------------------------------------------------------------------------------|
+| hosts               | This is the ansible hosts cofiguration file                                                                   |     
+| pentest             | This yaml file install Docker, Python3, Damn Vulnerable Web Application (DVWA) in the VM Web1 and VM Web2     |     
+| elk.yml             | This is the Ansible playbook file that install Elastic Logstash Kibana on the ELK VM to monitor Web1 and Web2 |
+| filebeat-config     | |           
+| filebeat-playbook   | Ansible playbook|            
+| metricbeat-config   | Configuraton file for metricbeat |            
+| metricbeat-playbook | Ansible playbook|            
 
 ---
 
@@ -37,44 +38,46 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 
 Load balancing ensures that the application will be highly availble, in addition to restricting unauthorized access to the network.
 
+A Load Balancer increases scalability, redundancy, reduce downtime, increase performace and flexibility and in case of an DDoS attack the load shifts making the system more robust. 
 
+A Jump Box is a system on the network used to access and manage the divices in the separated security zone. This add great security to the network as in case of an attack as strablish a clear funnel where traffic passes to internal network.
 
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the data and monitoring system logs.
 
-
-
-
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
-
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+- Filebeat is a lightweight shipper for forwarding and centralising log data. Filebeat monitors the log files or monitor locations in a system, collects log events and pass it to Elasticsearch or Logstash for indexing and analysis.
+- Metricbeat is a lightweight shipper that collect metrics from and OS and services running by the OS, this data is collected and pass it to Elastichsearch or Logstash for indexing and analysis. In this network Metricbeat records the state of the web servers.
 
 ---
 
 ### Configuration detailes of each VM
 ---
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function        | IP Address | Operating System |
-|----------|-----------------|------------|------------------|
-| Jump Box | Gateway         | 10.0.0.4   | Ubuntu Linux     |
-| Web1     | Reduncy         |            | Ubuntu Linux     |
-| Web2     | Reduncy         |            | Ubuntu Linux     |
-| ELK      | Log Monitoring  |            | Ubuntu Linux     |
-| DVWA-VM      | Log Monitoring  |            | Ubuntu Linux     |
-| ELK      | Log Monitoring  |            | Ubuntu Linux     |
-| ELK      | Log Monitoring  |            | Ubuntu Linux     |
-| ELK      | Log Monitoring  |            | Ubuntu Linux     |
+| Name          | Function        | Private IP    | Public IP     | Operating System |
+|---------------|-----------------|---------------|---------------|------------------|
+| Jump Box      | Gateway         | 10.1.0.150    |               | Ubuntu Linux     |
+| Web1          | Web Server      | 10.1.0.160    |               | Ubuntu Linux     |
+| Web2          | Web Server      | 10.1.0.170    |               | Ubuntu Linux     |
+| ELK           | ELK Server      | 10.0.0.4      |               | Ubuntu Linux     |
+| DVWA-VM       |                 |               |               | Ubuntu Linux     |
+| DVWA-VM       |                 |               |               | Ubuntu Linux     |
+| DVWA-VM       |                 |               |               | Ubuntu Linux     |
+| Load Balancer |                 |               | 40.83.171.137 | Ubuntu Linux     |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the machine that accepts SSH connections from the Internet is the Jump Box using an ecripted Public Key from and to my local computer at home from the following IP address:
+
+| Whitelisted IP address | Home   | Conneciton tipe | Method | Notes                                   |
+|------------------------|--------|-----------------|--------|-----------------------------------------|
+| [To Be Completed]      |        | HTTPS           | SSH    | Encripted connection using a Public Key |
+
 
 Machines within the network can only be accessed by the Jump Box and the Jump Box can be accessed by SSH with a Public Key from my Home PC
+
+
 - _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
 
 A summary of the access policies in place can be found in the table below.
