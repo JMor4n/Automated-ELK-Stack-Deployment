@@ -121,65 +121,39 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
 
-
-| Machine  | IP Adress  |  
-|----------|------------|
-| Web1     | 10.1.0.160 |     
-| Web2     | 10.1.0.170 | 
-| DVWA     |            |
-| DVWA     |            |           
+| Machine   | IP Adress  |  
+|-----------|------------|
+| Web1      | 10.1.0.160 |     
+| Web2      | 10.1.0.170 | 
+| DVWA web1 | --         |
+| DVWA web2 | --         |           
 
 We have installed the following Beats on these machines:
 - filebeat
 - metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- filebeat: collects traffic data such as geo location, time, method, OS used etc. from the Web1 and Web1
+- metricbeat: collects information about the web1 and web2 hardware and operating systme for example RAM and CPU load.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
 
-| Step   | Action | file                  | Location      |
-|--------|--------|-----------------------|---------------|
-| 1      | copy   | hosts                 | /etc/ansible/ |
-| 2      | copy   | pentest               | /etc/ansible/ |
-| 3      | copy   | elk.yml               | /etc/ansible/ |
-| 4      | copy   | filebeat-playbook.yml | /etc/ansible/ |
-| 5      | copy   | YES Internet          | /etc/ansible/ |
-| 6      | copy   | YES Internet          | /etc/ansible/ |
-| 7      | copy   | YES Internet          | /etc/ansible/ |
-| 8      | update | YES Internet          |               |
-| 9      | update | YES Internet          |               |
-| 10     | upate  | YES Internet          |               |
-| 11     | run    | YES Internet          |               |
+| Step   | Action | file                    | Location                                            |
+|--------|--------|-------------------------|-----------------------------------------------------|
+| 1      | copy   | hosts                   | /etc/ansible/                                       |
+| 2      | copy   | pentest.yml             | /etc/ansible/                                       |
+| 3      | install| elk.yml                 | /etc/ansible/                                       |
+| 4      | copy   | filebeat-playbook.yml   | /etc/ansible/                                       |
+| 5      | copy   | filebeat-config.yml     | /etc/ansible/                                       |
+| 6      | copy   | metricbeat-playbook.yml | /etc/ansible/                                       |
+| 7      | copy   | metricbeat-playbook.yml | /etc/ansible/                                       |
+| 8      | update | hosts                   | this to include the IP address of DVWA, ELK and Web |
+| 9      | run    | playbook                | open http://[public ELK IP addres]:5601/app/kiabana |
 
-## you are done smail 
+## smail you are done 
 
 --- 
-
-
-- Copy the file hosts to /etc/ansible/
-- Copy the Ansible playbook file pentest.yml to /etc/ansible/
-- Copy the Ansible playbook file [install-elk.yml] to /etc/ansible/
-- Copy the Ansible playbook file filebeat-playbook.yml to /etc/ansible/roles
-- Copy the Ansible playbook file metricbeat-playbook.yml files to /etc/ansible/roles
-- Copy the filebeat configuration file filebeat-config.yml to /etc/ansible/files/
-- Copy the metricbeat configuration file filebeat-config.yml to /etc/ansible/files/
-- Update the hosts file to include the IP addresses of the Web, DVWA and ELK machines in the sections [webserver] and [elk]
-- Update the filebeat configuration file filebeat-config.yml to use your ELK Server's IP address wherever 10.1.0.4 is used
-- Update the metricbeat configuration file metricbeat-playbook.yml to use your ELK Server's IP address wherever 10.1.0.4 is used
-- Run the playbook, and navigate to http://[public IP address of ELM machine]:5601/app/kibana to check that the installation worked as expected.
-
----
-
-
-
-As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
-ansible-playbook pentest.yml
-ansible-playbook install-elk.yml
-ansible-playbook filebeat-playbook.yml
-ansible-playbook metricbeat-playbook.yml
